@@ -1,5 +1,8 @@
 const buttonList = document.querySelector("#listar-aulas");
 const divResult = document.querySelector("#resultado");
+const buttonHash = document.querySelector("#buttonHash");
+const textoHash = document.querySelector("#hash");
+const resultHash = document.querySelector("#resultado-hash");
 
 buttonList.addEventListener("click", async function () {
     const result = await fetch("http://localhost/ams/")
@@ -7,7 +10,14 @@ buttonList.addEventListener("click", async function () {
             return response.json();
         });
     montarHTMLaulas(result);
+})
 
+buttonHash.addEventListener("click", async function () {
+    const result = await fetch("http://localhost/ams/hash/" + textoHash.value)
+        .then((response) => {
+            return response.json();
+        });
+    resultHash.innerHTML = result
 })
 
 montarHTMLaulas = (aulas) => {
